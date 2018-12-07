@@ -1,0 +1,429 @@
+{
+    "@cloudant/cloudant": {
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "@cloudnative/health": {
+        "npm": true,
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "@cloudnative/health-connect": {
+        "npm": true,
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "appmetrics": {
+        "npm": true,
+        "recommended-major-versions": {
+            "10.x": "4.x",
+            "6.x": "4.x",
+            "8.x": "4.x"
+        }
+    },
+    "appmetrics-dash": {
+        "recommended-major-versions": {
+            "10.x": "4.x",
+            "6.x": "4.x",
+            "8.x": "4.x"
+        }
+    },
+    "appmetrics-prometheus": {
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "appmetrics-zipkin": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "async": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "bluebird": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "body-parser": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "cfenv": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "cheerio": {
+        "recommended-major-versions": {
+            "10.x": "0.x",
+            "6.x": "0.x",
+            "8.x": "0.x"
+        }
+    },
+    "classnames": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "commander": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "compression": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "connect-multiparty": {
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "cookie-parser": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "cors": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "debug": {
+        "recommended-major-versions": {
+            "10.x": "4.x",
+            "6.x": "4.x",
+            "8.x": "4.x"
+        }
+    },
+    "dotenv": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "6.x",
+            "6.x": "6.x",
+            "8.x": "6.x"
+        }
+    },
+    "errorhandler": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "express": {
+        "recommended-major-versions": {
+            "10.x": "4.x",
+            "6.x": "4.x",
+            "8.x": "4.x"
+        }
+    },
+    "express-gateway": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "express-session": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "file-extension": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "4.x",
+            "6.x": "4.x",
+            "8.x": "4.x"
+        }
+    },
+    "file-loader": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "fs-extra": {
+        "recommended-major-versions": {
+            "10.x": "7.x",
+            "6.x": "7.x",
+            "8.x": "7.x"
+        }
+    },
+    "glob": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "7.x",
+            "6.x": "7.x",
+            "8.x": "7.x"
+        }
+    },
+    "gulp-util": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "hapi": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "17.x",
+            "6.x": "16.x",
+            "8.x": "17.x"
+        }
+    },
+    "js-yaml": {
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "jsonwebtoken": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "8.x",
+            "6.x": "8.x",
+            "8.x": "8.x"
+        }
+    },
+    "koa": {
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "1.x",
+            "8.x": "2.x"
+        }
+    },
+    "lodash": {
+        "recommended-major-versions": {
+            "10.x": "4.x",
+            "6.x": "4.x",
+            "8.x": "4.x"
+        }
+    },
+    "log4js": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "loopback": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "mime": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "minimist": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "mocha": {
+         "envVar": {
+             "CHROME_BIN": "/usr/bin/chromium-browser"
+        },
+        "recommended-major-versions": {
+            "10.x": "5.x",
+            "6.x": "5.x",
+            "8.x": "5.x"
+        }
+    },
+    "moment": {
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "node-report": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "passport": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "0.x",
+            "6.x": "0.x",
+            "8.x": "0.x"
+        }
+    },
+    "q": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "redis": {
+        "prefix": "v.",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "request": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "request-promise": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "4.x",
+            "6.x": "4.x",
+            "8.x": "4.x"
+        }
+    },
+    "rimraf": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "semver": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "5.x",
+            "6.x": "5.x",
+            "8.x": "5.x"
+        }
+    },
+    "socket.io": {
+        "recommended-major-versions": {
+            "10.x": "2.x",
+            "6.x": "2.x",
+            "8.x": "2.x"
+        }
+    },
+    "strong-supervisor": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "6.x",
+            "6.x": "6.x",
+            "8.x": "6.x"
+        }
+    },
+    "through2": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "underscore": {
+        "recommended-major-versions": {
+            "10.x": "1.x",
+            "6.x": "1.x",
+            "8.x": "1.x"
+        }
+    },
+    "uuid": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "winston": {
+        "recommended-major-versions": {
+            "10.x": "3.x",
+            "6.x": "3.x",
+            "8.x": "3.x"
+        }
+    },
+    "xhr2": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "0.x",
+            "6.x": "0.x",
+            "8.x": "0.x"
+        }
+    },
+    "yargs": {
+        "prefix": "v",
+        "recommended-major-versions": {
+            "10.x": "12.x",
+            "6.x": "12.x",
+            "8.x": "12.x"
+        }
+    }
+}

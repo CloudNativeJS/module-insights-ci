@@ -1,0 +1,21 @@
+{
+  "name": "module-insights-ci",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CloudNativeJS/module-insights-ci"
+  },
+  "scripts": {
+    "lint": "eslint **/*.js",
+    "test": "npm run lint && bash ./test/test.sh"
+  },
+  "dependencies": {
+    "ibm-cos-sdk": "^1.2.3",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1"
+  }
+}

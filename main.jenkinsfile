@@ -1,0 +1,145 @@
+#!/usr/bin/env groovy
+
+/***************************************************************************
+*
+* (C) Copyright IBM Corp. 2018
+*
+*  This program and the accompanying materials are made available
+*  under the terms of the Apache License v2.0 which accompanies
+*  this distribution.
+*
+*      The Apache License v2.0 is available at
+*      http://www.opensource.org/licenses/apache2.0.php
+*
+* Contributors:
+*   Multiple authors (IBM Corp.) - initial implementation and documentation
+***************************************************************************/
+
+properties([
+    parameters([
+      choice(name: 'CITGM_LOGLEVEL', choices: 'verbose\ninfo\nwarn\nsilly\nerror', defaultValue: 'verbose', description: 'This defines log level for CITGM.'),
+      string(defaultValue: "module-curation.eu-gb.mybluemix.net", description: 'module-curation-development.stage1.eu-gb.mybluemix.net || module-curation.eu-gb.mybluemix.net || IP:PORT', name: 'HOST'),
+      string(defaultValue: "refs/heads/master", description: 'The remote portion of the Git refspec to fetch and test PR - refs/pull/PR_NUMBER/head', name: 'GIT_REMOTE_REF'),
+      string(name: 'STARTFROM', defaultValue: '1', description: '''Where to start from: 1=PRE-CLEANUP, 2=MC-CITGM, 3=MC-License, 4=POST-CLEANUP''')
+  ]),
+])
+
+withCredentials([usernamePassword(credentialsId: 'fb878c0f-2ce4-4759-9953-cfc36d59cf9b',
+                     usernameVariable: 'API_USERNAME', passwordVariable: 'PASSWORD')]) {
+
+  def STARTFROM = params.STARTFROM.toInteger()
+
+  stage('PRE-CLEANUP') { if (STARTFROM <= 1) {
+    node ('linux && x64') {
+      checkout scm
+      withEnv(["HOST=${params.HOST}", "API_USERNAME=${env.API_USERNAME}", "PASSWORD=${env.PASSWORD}", "GIT_REMOTE_REF=${params.GIT_REMOTE_REF}"]){
+        env.citgm_parameters = sh (
+          script: "./clean-data.sh"
+        )
+      }
+    }
+  } }
+
+  stage('MC-CITGM (Test + Coverage)') { if (STARTFROM <= 2) {
+
+    /* - Check for new node/module version and add them to the database
+       - Find missing test results and return params for MC-CITGM */
+    node ('linux && x64') {
+      checkout scm
+      withEnv(["HOST=${params.HOST}", "API_USERNAME=${env.API_USERNAME}", "PASSWORD=${env.PASSWORD}", "GIT_REMOTE_REF=${params.GIT_REMOTE_REF}"]){
+        env.citgm_parameters = sh (
+          returnStdout: true,
+          script: "./missing-test.sh"
+        )
+      }
+    }
+
+    println "\n\n${env.citgm_parameters}\n\n"
+
+    def resp = env.citgm_parameters.trim().tokenize('%') // Create an array of parameters
+
+    // Create an array of buildJobs to run in parallel
+    def buildJobs = [:]
+    resp.each { str ->
+      def p = str.tokenize(',')
+      def module = "${p[0]}", module_version = "${p[1]}", node_version = "${p[2]}"
+      def os = "${p[3]}", arch = "${p[4]}", distro = "${p[5]}"
+      def parameters = []
+      parameters.push(string(name: 'MODULE',         value: module))
+      parameters.push(string(name: 'MODULE_VERSION', value: module_version))
+      parameters.push(string(name: 'NODE_VERSION',   value: node_version))
+      parameters.push(string(name: 'HOST',           value: params.HOST))
+      parameters.push(string(name: 'OSS',            value: os))
+      parameters.push(string(name: 'ARCHS',          value: arch))
+      parameters.push(string(name: 'DISTROS',        value: distro))
+      parameters.push(string(name: 'GIT_REMOTE_REF', value: params.GIT_REMOTE_REF))
+      // parameters.push(string(name: 'CITGM_LOGLEVEL', value: params.CITGM_LOGLEVEL))
+      buildJobs["$module@$module_version-$node_version($os $arch $distro)"] = { build(job: "MC-CITGM", parameters: parameters, propagate: false) }
+    }
+
+    def results = parallel(buildJobs)
+
+    def msg = '\nRESULTS:\n'
+    results.each { res ->
+       msg += "${res.key}: ${results[res.key].result}\n"
+       currentBuild.result = results[res.key].result
+    }
+    println msg
+
+  } }
+
+  stage('MC-License') { if (STARTFROM <= 3) {
+
+    /* Find missing licenses */
+    node ('linux && x64') {
+      checkout scm
+      withEnv(["HOST=${params.HOST}", "GIT_REMOTE_REF=${params.GIT_REMOTE_REF}"]) {
+        env.license_params = sh (
+          returnStdout: true,
+          script: "./missing-license.sh"
+        )
+      }
+    }
+
+    def license_params = env.license_params.trim().tokenize('%') // Create an array of parameters
+
+    // Create an array of buildJobs to run in parallel
+    def buildJobs = [:];
+    license_params.each { str ->
+      def p = str.tokenize(',')
+      def module = "${p[0].trim()}", module_version = "${p[1].trim()}"
+      def parameters = []
+      parameters.push(string(name: 'MODULE',         value: module))
+      parameters.push(string(name: 'MODULE_VERSION', value: module_version))
+      parameters.push(string(name: 'NODE_VERSION',   value: "8"))
+      parameters.push(string(name: 'HOST',           value: params.HOST))
+      parameters.push(string(name: 'ENV',            value: params.ENV))
+      parameters.push(string(name: 'GIT_REMOTE_REF', value: params.GIT_REMOTE_REF))
+      // parameters.push(string(name: 'CITGM_LOGLEVEL', value: params.CITGM_LOGLEVEL))
+      buildJobs["$module@$module_version"] = { build(job: "MC-License-Check", parameters: parameters, propagate: false) }
+    }
+
+    def results = parallel(buildJobs)
+
+    def msg = '\nRESULTS:\n'
+    results.each { res ->
+       msg += "${res.key}: ${results[res.key].result}\n"
+       currentBuild.result = results[res.key].result
+    }
+    println msg
+
+  } }
+
+  stage('POST-CLEANUP') { if (STARTFROM <= 4) {
+    node ('linux && x64') {
+      checkout scm
+      withEnv(["HOST=${params.HOST}", "API_USERNAME=${env.API_USERNAME}", "PASSWORD=${env.PASSWORD}", "GIT_REMOTE_REF=${params.GIT_REMOTE_REF}"]){
+        env.citgm_parameters = sh (
+          script: "./clean-data.sh"
+        )
+      }
+    }
+  } }
+
+  println "\n\n \\(• ◡ •)/  Pipeline COMPLETE  \\(• ◡ •)/\n\n"
+}
